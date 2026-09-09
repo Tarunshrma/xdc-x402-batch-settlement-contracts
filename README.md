@@ -42,29 +42,33 @@ https://github.com/Tarunshrma/xdc-x402-facilitator
 
 ## Deployed XDC addresses
 
-Not yet broadcast from this repo. Preflight on 2026-09-09 found CREATE2 and
-Permit2 already on XDC mainnet (50) and Apothem (51); canonical
-`x402BatchSettlement` had no code yet.
+Live CREATE2 deploy on **XDC Network (chain id 50)** on 2026-09-09 from
+`0xaf28621e287e4EA0F14FA7e7ba365206FD6279DA`. Official salts produced the
+canonical addresses:
 
-If the official CREATE2 path succeeds, expected addresses are:
+| Contract | Address | Explorer | Deploy tx |
+| --- | --- | --- | --- |
+| `x402BatchSettlement` | `0x4020074e9dF2ce1deE5A9C1b5c3f541D02a10003` | [xdcscan](https://xdcscan.com/address/0x4020074e9dF2ce1deE5A9C1b5c3f541D02a10003) | [0x27507da7…](https://xdcscan.com/tx/0x27507da722c2007d40c70ee98e8ef6e337ebf03a5c34bccb415eb27b7a2cfb63) |
+| `ERC3009DepositCollector` | `0x4020806089470a89826cB9fB1f4059150b550004` | [xdcscan](https://xdcscan.com/address/0x4020806089470a89826cB9fB1f4059150b550004) | [0xe58f5ff9…](https://xdcscan.com/tx/0xe58f5ff94fab0d698a80b1e3a9a7a7d1d9d0e82f494a3392c6ff0ea8b8ba8305) |
+| `Permit2DepositCollector` | `0x4020425FAf3B746C082C2f942b4E5159887B0005` | [xdcscan](https://xdcscan.com/address/0x4020425FAf3B746C082C2f942b4E5159887B0005) | [0xd29f142f…](https://xdcscan.com/tx/0xd29f142fe1704154bc543bd16e9a7dd98004bc869dc24cfe1bec10a445dd4523) |
 
-| Contract | Address |
+| Item | Value |
 | --- | --- |
-| `x402BatchSettlement` | `0x4020074e9dF2ce1deE5A9C1b5c3f541D02a10003` |
-| `ERC3009DepositCollector` | `0x4020806089470a89826cB9fB1f4059150b550004` |
-| `Permit2DepositCollector` | `0x4020425FAf3B746C082C2f942b4E5159887B0005` |
+| RPC host | `rpcxdcai.icotokens.net` |
+| CREATE2 factory | `0x4e59b44847b379578588920cA78FbF26c0B4956C` |
+| Blocks | 107026531, 107026532, 107026534 |
+| Gas used | 3,101,478 / 369,263 / 724,394 |
+| Compiler | solc 0.8.28, cancun, optimizer 200, `cbor_metadata = false` |
+| Source verification | pending on XDC explorer |
 
-This repo's compile at the pinned settings produces those CREATE2
-addresses. They are **not yet deployed** on XDC mainnet or Apothem.
-Fill explorer links in [docs/deployment-record.md](docs/deployment-record.md)
-after the operator broadcasts and verifies.
+Empty-channel `eth_call` against the live settlement contract matches
+facilitator PR #101: `channels` and `pendingWithdrawals` return two zero
+words; `refundNonce` returns one zero word.
 
 ## Opcode probe
 
 EIP-1153 `TSTORE`/`TLOAD` `eth_call` succeeded on XDC mainnet and Apothem
 (`result = 0x00…00`). See [docs/xdc-opcode-probe.md](docs/xdc-opcode-probe.md).
-
-That is a positive runtime signal, not a substitute for a live deploy.
 
 ## Read ABI proof
 
@@ -76,6 +80,12 @@ Local Foundry tests confirm facilitator PR #101 word layout:
 - `refundNonce(bytes32)` returns `uint256`
 
 Details: [docs/read-abi-proof.md](docs/read-abi-proof.md).
+
+Live XDC mainnet empty-channel calldata/returns:
+
+- `channels(bytes32)` `0x7a7ebd7b` → 64 zero bytes (word0 balance, word1 totalClaimed)
+- `pendingWithdrawals(bytes32)` `0xb7f06ebe` → 64 zero bytes (word1 = `initiatedAt`)
+- `refundNonce(bytes32)` `0xf0dc792e` → 32 zero bytes
 
 ## Build
 
