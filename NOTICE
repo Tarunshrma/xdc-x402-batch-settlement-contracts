@@ -1,0 +1,46 @@
+Apache-2.0 License
+
+Copyright 2024 Coinbase
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+---
+
+This repository (`xdc-x402-batch-settlement-contracts`) includes unmodified
+copies of files from https://github.com/x402-foundation/x402 at commit
+84ffb6412a1f2f45a62971c5549eff794281c099.
+
+Copied paths from that commit:
+
+- contracts/evm/src/x402BatchSettlement.sol
+- contracts/evm/src/interfaces/IDepositCollector.sol
+- contracts/evm/src/interfaces/IERC3009.sol
+- contracts/evm/src/interfaces/ISignatureTransfer.sol
+- contracts/evm/src/periphery/DepositCollector.sol
+- contracts/evm/src/periphery/ERC3009DepositCollector.sol
+- contracts/evm/src/periphery/Permit2DepositCollector.sol
+- contracts/evm/script/DeployBatchSettlement.s.sol
+- contracts/evm/docs/x402-batch-settlement-implementers.md
+
+Upstream Solidity files retain their original MIT SPDX identifiers. The
+x402-foundation/x402 repository license at the pinned commit is Apache-2.0;
+this repository uses the same Apache-2.0 license for the work as a whole.
+
+Local XDC deployment scripts, opcode-probe/read-ABI scripts, Foundry tests,
+and documentation under `docs/` (except `docs/upstream/`) are maintained by
+this repository.
+
+This project is independent. It is not an official product of the x402
+Foundation, Coinbase, Base, or the XDC Network unless those parties
+explicitly endorse it. Names and trademarks of third parties are used only
+to identify the upstream protocol and the target network.

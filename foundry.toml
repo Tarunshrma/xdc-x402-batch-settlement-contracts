@@ -1,0 +1,38 @@
+[profile.default]
+src = "src"
+out = "out"
+libs = ["lib"]
+test = "test"
+script = "script"
+solc = "0.8.28"
+evm_version = "cancun"
+optimizer = true
+optimizer_runs = 200
+via_ir = false
+cbor_metadata = false
+bytecode_hash = "none"
+ffi = false
+fs_permissions = [{ access = "read", path = "./" }]
+gas_reports = ["x402BatchSettlement"]
+
+# Match x402-foundation/x402 contracts/evm/foundry.toml at
+# 84ffb6412a1f2f45a62971c5549eff794281c099 so CREATE2 initCode stays
+# byte-identical to the official batch-settlement artifact.
+
+[profile.default.fuzz]
+runs = 256
+max_test_rejects = 65536
+
+[rpc_endpoints]
+xdc = "${XDC_RPC_URL}"
+xdc_apothem = "${XDC_APOTHEM_RPC_URL}"
+
+[fmt]
+line_length = 120
+tab_width = 4
+bracket_spacing = false
+int_types = "long"
+multiline_func_header = "params_first"
+quote_style = "double"
+number_underscore = "thousands"
+single_line_statement_blocks = "preserve"

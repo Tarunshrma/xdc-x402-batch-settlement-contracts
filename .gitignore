@@ -1,0 +1,29 @@
+# Compiler output
+out/*
+!out/.gitkeep
+cache/
+
+# Environment / secrets
+.env
+.env.local
+*.pem
+id_rsa
+id_ed25519
+
+# Coverage
+lcov.info
+coverage/
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Broadcast files (deployment artifacts; may contain RPC URLs)
+broadcast/
+
+# Debug
+debug/
